@@ -6,6 +6,7 @@ import {
   ChartDonutIcon,
 } from '@phosphor-icons/react';
 import {SharedData} from "@/types";
+import {login} from "@/routes";
 
 export default function Welcome({
                                   canRegister = true,
@@ -67,7 +68,7 @@ export default function Welcome({
               </p>
               {!auth?.user && (
                 <Link
-                  href={"#"}
+                  href={login()}
                   className="text-md inline-block rounded-full bg-grey-900 px-5 py-3 font-medium text-white hover:bg-black md:text-lg"
                 >
                   Start Your Journey
