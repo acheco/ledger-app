@@ -1,3 +1,5 @@
+import InputError from '@/components/input-error';
+import { Spinner } from '@/components/spinner';
 import Button from '@/components/ui/button';
 import Input from '@/components/ui/input';
 import Label from '@/components/ui/label';
@@ -18,11 +20,12 @@ export default function Login({ status }: LoginProps) {
       <Form
         {...store.form()}
         resetOnSuccess={['password']}
-        className="space-y-8 rounded-lg bg-white px-5 py-6"
+        resetOnError={['password']}
+        className="w-full space-y-8 rounded-lg bg-white px-5 py-6 md:w-lg"
       >
         {({ processing, errors }) => (
           <>
-            <h2 className="mb-8 text-[32px] font-bold">Login</h2>
+            <h2 className="mb-8 text-[32px] font-bold text-grey-900">Login</h2>
 
             <div className="space-y-4">
               <div className="flex flex-col">
@@ -32,9 +35,10 @@ export default function Login({ status }: LoginProps) {
                   type="email"
                   name="email"
                   tabIndex={1}
+                  autoComplete="email"
                   required
                 />
-                <span>{errors.email}</span>
+                <InputError message={errors.email} />
               </div>
 
               <div className="flex flex-col">
@@ -46,16 +50,18 @@ export default function Login({ status }: LoginProps) {
                   tabIndex={2}
                   required
                 />
-                <span>{errors.password}</span>
+                <InputError message={errors.password} />
               </div>
             </div>
 
             <Button
               type="submit"
-              className="w-full rounded-md bg-grey-900 py-4 text-sm leading-normal font-bold tracking-normal text-white"
+              className="flex w-full items-center justify-center rounded-md bg-grey-900 py-4 text-sm leading-normal font-bold tracking-normal text-white"
               disabled={processing}
+              data-test="login-button"
             >
-              {processing ? 'Logging in...' : 'Login'}
+              {processing && <Spinner />}
+              Login
             </Button>
 
             <div className="flex items-center justify-center space-x-3">
@@ -64,7 +70,7 @@ export default function Login({ status }: LoginProps) {
               </span>
               <Link
                 href={register()}
-                className="font-bold text-grey-900 underline"
+                className="text-sm leading-normal font-bold tracking-normal text-grey-900 underline"
               >
                 Sign Up
               </Link>
