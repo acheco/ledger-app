@@ -1,24 +1,25 @@
 import AppLogoIcon from '@/components/app-logo-icon';
-import {Head, Link, usePage} from '@inertiajs/react';
+import { dashboard, login, register } from '@/routes';
+import { SharedData } from '@/types';
+import { Head, Link, usePage } from '@inertiajs/react';
 import {
   ArrowsDownUpIcon,
   ChartBarIcon,
   ChartDonutIcon,
 } from '@phosphor-icons/react';
-import {SharedData} from "@/types";
 
 export default function Welcome({
-                                  canRegister = true,
-                                }: {
+  canRegister = true,
+}: {
   canRegister?: boolean;
 }) {
-  const {auth} = usePage<SharedData>().props;
+  const { auth } = usePage<SharedData>().props;
 
   return (
     <>
       <Head title="Welcome">
-        <link rel="preconnect" href="https://fonts.googleapis.com"/>
-        <link rel="preconnect" href="https://fonts.gstatic.com"/>
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" />
         <link
           href="https://fonts.googleapis.com/css2?family=Public+Sans:ital,wght@0,100..900;1,100..900&display=swap"
           rel="stylesheet"
@@ -28,14 +29,14 @@ export default function Welcome({
         <header className="mb-6 w-full px-2 text-sm not-has-[nav]:hidden md:max-w-xl lg:max-w-4xl">
           <nav className="flex items-center justify-between gap-4">
             <div className="flex items-center gap-4">
-              <AppLogoIcon/>
+              <AppLogoIcon />
               <h1 className="text-2xl font-bold md:text-4xl dark:text-grey-900">
                 Ledger
               </h1>
             </div>
             {auth?.user ? (
               <Link
-                href="#"
+                href={dashboard()}
                 className="inline-block rounded-sm border border-[#19140035] px-5 py-1.5 text-sm leading-normal text-[#1b1b18] hover:border-[#1915014a]"
               >
                 Dashboard
@@ -44,7 +45,7 @@ export default function Welcome({
               <div className="flex items-center gap-4">
                 {canRegister && (
                   <Link
-                    href={"#"}
+                    href={register()}
                     className="inline-block rounded-sm bg-grey-900 px-5 py-1.5 text-sm font-medium text-white hover:bg-black"
                   >
                     Get Stared
@@ -57,9 +58,8 @@ export default function Welcome({
         <div className="flex w-full justify-center lg:grow">
           <main className="px-8 xl:max-w-7xl xl:px-0">
             <div className="flex flex-col items-center justify-center gap-4 space-y-6 px-4 sm:py-20">
-              <h2
-                className="text-center text-4xl font-semibold tracking-tight text-black md:text-5xl lg:text-6xl xl:text-7xl">
-                Master your money <br/> with confidence
+              <h2 className="text-center text-4xl font-semibold tracking-tight text-black md:text-5xl lg:text-6xl xl:text-7xl">
+                Master your money <br /> with confidence
               </h2>
               <p className="max-w-lg text-center text-lg leading-8 text-beige-500 md:text-xl lg:text-2xl xl:text-2xl">
                 Track expenses, save for goals, and invest wisely with our
@@ -67,7 +67,7 @@ export default function Welcome({
               </p>
               {!auth?.user && (
                 <Link
-                  href={"#"}
+                  href={login()}
                   className="text-md inline-block rounded-full bg-grey-900 px-5 py-3 font-medium text-white hover:bg-black md:text-lg"
                 >
                   Start Your Journey
@@ -75,11 +75,9 @@ export default function Welcome({
               )}
             </div>
             <div className="mt-24 grid gap-6 px-4 md:grid-cols-3">
-              <div
-                className="group relative overflow-hidden rounded-3xl bg-grey-900 p-8 transition-all hover:-translate-y-1 hover:shadow-lg">
-                <div
-                  className="mb-6 inline-flex h-12 w-12 items-center justify-center rounded-2xl bg-beige-100 shadow-sm dark:bg-muted">
-                  <ArrowsDownUpIcon className="h-6 w-6"/>
+              <div className="group relative overflow-hidden rounded-3xl bg-grey-900 p-8 transition-all hover:-translate-y-1 hover:shadow-lg">
+                <div className="dark:bg-muted mb-6 inline-flex h-12 w-12 items-center justify-center rounded-2xl bg-beige-100 shadow-sm">
+                  <ArrowsDownUpIcon className="h-6 w-6" />
                 </div>
                 <h3 className="mb-3 text-xl font-medium text-white">
                   Track Transactions
@@ -90,15 +88,13 @@ export default function Welcome({
                   into your spending patterns.
                 </p>
                 <div className="absolute right-0 bottom-0 opacity-10 transition-opacity group-hover:opacity-20">
-                  <ArrowsDownUpIcon className="-mr-8 -mb-8 h-32 w-32 text-beige-100"/>
+                  <ArrowsDownUpIcon className="-mr-8 -mb-8 h-32 w-32 text-beige-100" />
                 </div>
               </div>
 
-              <div
-                className="group relative overflow-hidden rounded-3xl bg-grey-900 p-8 transition-all hover:-translate-y-1 hover:shadow-lg">
-                <div
-                  className="mb-6 inline-flex h-12 w-12 items-center justify-center rounded-2xl bg-beige-100 shadow-sm dark:bg-muted">
-                  <ChartDonutIcon className="h-6 w-6"/>
+              <div className="group relative overflow-hidden rounded-3xl bg-grey-900 p-8 transition-all hover:-translate-y-1 hover:shadow-lg">
+                <div className="dark:bg-muted mb-6 inline-flex h-12 w-12 items-center justify-center rounded-2xl bg-beige-100 shadow-sm">
+                  <ChartDonutIcon className="h-6 w-6" />
                 </div>
                 <h3 className="mb-3 text-xl font-medium text-white">
                   Smart Budgets
@@ -109,15 +105,13 @@ export default function Welcome({
                   in control, stress-free.
                 </p>
                 <div className="absolute right-0 bottom-0 opacity-10 transition-opacity group-hover:opacity-20">
-                  <ChartDonutIcon className="-mr-8 -mb-8 h-32 w-32 text-beige-100"/>
+                  <ChartDonutIcon className="-mr-8 -mb-8 h-32 w-32 text-beige-100" />
                 </div>
               </div>
 
-              <div
-                className="group relative overflow-hidden rounded-3xl bg-grey-900 p-8 transition-all hover:-translate-y-1 hover:shadow-lg">
-                <div
-                  className="mb-6 inline-flex h-12 w-12 items-center justify-center rounded-2xl bg-beige-100 shadow-sm dark:bg-muted">
-                  <ChartBarIcon className="h-6 w-6"/>
+              <div className="group relative overflow-hidden rounded-3xl bg-grey-900 p-8 transition-all hover:-translate-y-1 hover:shadow-lg">
+                <div className="dark:bg-muted mb-6 inline-flex h-12 w-12 items-center justify-center rounded-2xl bg-beige-100 shadow-sm">
+                  <ChartBarIcon className="h-6 w-6" />
                 </div>
                 <h3 className="mb-3 text-xl font-medium text-white">
                   Savings Pots
@@ -128,7 +122,7 @@ export default function Welcome({
                   grow with purpose.
                 </p>
                 <div className="absolute right-0 bottom-0 opacity-10 transition-opacity group-hover:opacity-20">
-                  <ChartBarIcon className="-mr-8 -mb-8 h-32 w-32 text-beige-100"/>
+                  <ChartBarIcon className="-mr-8 -mb-8 h-32 w-32 text-beige-100" />
                 </div>
               </div>
             </div>
